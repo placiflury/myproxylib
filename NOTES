@@ -1,0 +1,33 @@
+Some notes concerning the myproxy library
+----------------------------------------
+
+The library does not implement the entire myproxy protocol
+as specified at http://grid.ncsa.illinois.edu/myproxy/protocol.
+
+Currently only the 'put' and 'get' methods of the protocol 
+have been implemented.
+
+Notes on the 'put' method: 
+-------------------------
+
+When 'put'ing a local grid certificate to the myproxy server 
+the library creates a local proxy certificate which is used
+to sign the CSR received by the myproxy server. 
+
+One can only specify the key length of the proxy certificate
+that is used to sign the CSR. All other key lenghts are fixed
+by the myproxy server. 
+
+The put method allows allows uploading certificates of the 
+types:  old (old style proxy) and rfc (rfc 3820 proxies) 
+and to optionaly specify whether the policy of the proxy 
+shall be set to 'limited'. 
+
+Mixed remarks:
+-------------
+
+It seems that old style limited proxies can correclty be up-
+and downloaded (put/get methods), but a downloaded limited
+proxy can't be used to fetch the VOMS credentials for the
+user. 
+
